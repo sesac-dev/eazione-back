@@ -49,4 +49,3 @@ sudo docker compose -p docshelper-${BEFORE_COLOR} -f compose-${BEFORE_COLOR}.yml
 
 # 5
 sudo docker image prune -f
----
