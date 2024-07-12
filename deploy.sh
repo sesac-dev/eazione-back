@@ -5,15 +5,15 @@ EXIST_GITCHAN=$(sudo docker compose -p docshelper-8080 -f compose-blue.yml ps | 
 if [ -z "$EXIST_GITCHAN" ]; then
         echo "8080 컨테이너 실행"
         sudo docker compose -p docshelper-8080 -f compose-blue.yml up -d --force-recreate
-        BEFORE_COLOR="8081"
-        AFTER_COLOR="8080"
+        BEFORE_COLOR="green"
+        AFTER_COLOR="blue"
         BEFORE_PORT=8081
         AFTER_PORT=8080
 else
         echo "8081 컨테이너 실행"
         sudo docker compose -p docshelper-8081 -f compose-green.yml up -d --force-recreate
-        BEFORE_COLOR="8080"
-        AFTER_COLOR="8081"
+        BEFORE_COLOR="blue"
+        AFTER_COLOR="green"
         BEFORE_PORT=8080
         AFTER_PORT=8081
 fi
@@ -45,7 +45,7 @@ echo "Deploy Completed!!"
 
 # 4
 echo "$BEFORE_COLOR server down(port:${BEFORE_PORT})"
-sudo docker compose -p ulvan-${BEFORE_COLOR} -f docker-compose.ulvan${BEFORE_COLOR}.yml down
+sudo docker compose -p docshelper-${BEFORE_COLOR} -f compose-${BEFORE_COLOR}.yml down
 
 # 5
 sudo docker image prune -f
