@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  api:
+    image: docshelper-api
+    container_name: docshelper-8081
+    environment:
+      - TZ=Asia/Seoul
+      - LANG=ko_KR.UTF-8
+      - HTTP_PORT=8081
+#      - jasypt.encryptor.key=[KEY VALUE]
+    ports:
+      - '8081:8080'
