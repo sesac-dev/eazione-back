@@ -1,6 +1,9 @@
 spring:
   application:
     name: docshelper
+  profiles:
+    include:
+      - key
 server:
   port: 8080
   servlet:
