@@ -4,6 +4,21 @@ spring:
   profiles:
     include:
       - key
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${db.mysql.server}
+    username: ENC(aK96+/1gVVUtIV7lzTgavA==)
+    password: ENC(X1TFqz2bGD5IMts6sOxRsoDeQP4n2scl)
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: Asia/Seoul
+    show-sql: true
+
 server:
   port: 8080
   servlet:
