@@ -1,17 +1,17 @@
 #실행중인 8080컨테이너 탐색
-EXIST_GITCHAN=$(sudo docker compose -p docshelper-8080 -f compose-blue.yml ps | grep Up)
+EXIST_GITCHAN=$(sudo docker compose -p docshelper-blue -f compose-blue.yml ps | grep Up)
 
 #실행중인 8080컨테이너 없으면
 if [ -z "$EXIST_GITCHAN" ]; then
         echo "8080 컨테이너 실행"
-        sudo docker compose -p docshelper-8080 -f compose-blue.yml up -d --force-recreate
+        sudo docker compose -p docshelper-blue -f compose-blue.yml up -d --force-recreate
         BEFORE_COLOR="green"
         AFTER_COLOR="blue"
         BEFORE_PORT=8081
         AFTER_PORT=8080
 else
         echo "8081 컨테이너 실행"
-        sudo docker compose -p docshelper-8081 -f compose-green.yml up -d --force-recreate
+        sudo docker compose -p docshelper-green -f compose-green.yml up -d --force-recreate
         BEFORE_COLOR="blue"
         AFTER_COLOR="green"
         BEFORE_PORT=8080
