@@ -39,3 +39,19 @@ springdoc:
     tags-sorter: alpha            # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
     operations-sorter: alpha      # alpha: 알파벳 순 태그 정렬, method: HTTP Method 순 정렬
     display-request-duration: true
+
+oauth2:
+  google:
+    client-id: ENC(BLCB0WfVVM62jPLgQcEbnGczWTO26GrhNHQLSKEjg77DY/tS5Le/pQofyDLbBCiz44RHqvkTioWpQEBpatlawf429YJKdwcwHzJNCWYBaHEA+ZWKEoPkSQ==)
+    client-secret: ENC(T7lZR5pOkUNQd+c8sFtK2ahvatXX8STB49tej7ex+XzJo2RveOdFLWnh43CfVo+K)
+    redirect-uri:
+      local: ENC(kaDWPeMwQizX8BZ0RLjTM9jJROc7nmqNHoVBsvu9LijThYx/PAmFmS8tPyzuBp4XNL+d0URsBCo=)
+      dev: ENC(IhPpvDrd2HDI2VVYuYvXNFERomrjS/mQdyQW0bE/8nkeWDlESxClDQ7/1ZujFr+V3ImMf5dhDSY=)
+    token-uri: ENC(+DvxpEFqL29rxdHsIOQmAsoadq3jnzLzcvvgAUbQ670RBFLgdtfyt7sKZjKvsjWd)
+    resource-uri: ENC(mUB8ZfrAPUubt0Z/XvS9yFQoMcWJPQa+ASL2+Jhn35u2qDRHoJqKsds7VQ9e+sZ07vszt4Ux4vI=)
+
+jwt:
+  secret: ENC(dTQuX11BrDFtcUjBGutl+Ro3w2aQ8XYINrRlo6EN4Delt0a3CMY+ruOpM2B2pDoUmFvT4JiI8p+5lZFIEOZo97hcYJZVzv9Pm1Tzo/97dKQ+Wrc0fOD+5jKptZ6ClmALG00xBHduspvn+wya+1bV6QvZya/gT+14YHw49+TG1xBXFHAwERjQwl6flHHTpwAN)
+  token:
+    access-expiration-time: 43200000 # 12시간
+    refresh-expiration-time: 259200000 # 3일
