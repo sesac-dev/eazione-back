@@ -45,7 +45,7 @@ oauth2:
     client-id: ENC(BLCB0WfVVM62jPLgQcEbnGczWTO26GrhNHQLSKEjg77DY/tS5Le/pQofyDLbBCiz44RHqvkTioWpQEBpatlawf429YJKdwcwHzJNCWYBaHEA+ZWKEoPkSQ==)
     client-secret: ENC(T7lZR5pOkUNQd+c8sFtK2ahvatXX8STB49tej7ex+XzJo2RveOdFLWnh43CfVo+K)
     redirect-uri:
-      local: ENC(kaDWPeMwQizX8BZ0RLjTM9jJROc7nmqNHoVBsvu9LijThYx/PAmFmS8tPyzuBp4XNL+d0URsBCo=)
+      local: ENC(GZfCHdh284uESChWedFUfwpEgppqdlfyE1RkSJPGrcrb675Q81q1L3OOMyDPzmyg3dsEgMRlQpE=)
       dev: ENC(IhPpvDrd2HDI2VVYuYvXNFERomrjS/mQdyQW0bE/8nkeWDlESxClDQ7/1ZujFr+V3ImMf5dhDSY=)
     token-uri: ENC(+DvxpEFqL29rxdHsIOQmAsoadq3jnzLzcvvgAUbQ670RBFLgdtfyt7sKZjKvsjWd)
     resource-uri: ENC(mUB8ZfrAPUubt0Z/XvS9yFQoMcWJPQa+ASL2+Jhn35u2qDRHoJqKsds7VQ9e+sZ07vszt4Ux4vI=)
