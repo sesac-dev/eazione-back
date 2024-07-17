@@ -30,7 +30,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         // 토큰 가져오기
         String token = jwtUtil.separateBearer(request.getHeader("Authorization"));
         // 토큰이 없다면 다음 filter로 넘기기
-        if(token == null) {
+        if (token == null) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -59,7 +59,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
-    // 인증 객체 생성 후 stateless 한 세션에 등록
+
     private void setAuthentication(String email) {
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         Authentication authentication = jwtUtil.createAuthentication(email);
