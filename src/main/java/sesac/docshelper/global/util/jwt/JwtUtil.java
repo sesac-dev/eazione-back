@@ -48,7 +48,7 @@ public class JwtUtil {
         return null;
     }
     // 토큰 생성
-    public String createToken(String email, String role, boolean isAccess) {
+    public String createToken(String email, boolean isAccess) {
         Date now = new Date();
         // 토근 생성
         return Jwts.builder()
