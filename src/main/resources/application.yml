@@ -55,3 +55,17 @@ jwt:
   token:
     access-expiration-time: 43200000 # 12시간
     refresh-expiration-time: 259200000 # 3일
+
+#aws s3 bucket
+cloud:
+  aws:
+    s3:
+      bucket: ENC(ZSHbUr/zXFOQcSI3y54nHiXlAsxw563p)
+    credentials:
+      access-key: ENC(1e9KxmFrWk0TQJ7QwlDEK7aPFTR2+wi07811K9kYs34=)
+      secret-key: ENC(eLr+oY8wKNE+8ka2LqcstS3jWYPHwEJr80m8DBJG/V4BKVbfGzZuQAlrKlwhzFYvz7Y6ZwFHu0k=)
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false

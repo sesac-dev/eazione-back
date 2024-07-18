@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import sesac.docshelper.domain.member.dto.TokenDTO;
 import sesac.docshelper.domain.member.dto.googleOauth.GoogleOauthDTO;
 import sesac.docshelper.domain.member.dto.googleOauth.GoogleProfileDTO;
 import sesac.docshelper.domain.member.dto.response.SignUpResponse;
@@ -40,7 +41,7 @@ public class MemberOAuth2Service {
                 .map(oauthDTO -> findProfile(oauthDTO.access_token()))
                 .map(profileDTO -> memberRepository.findByEmail(profileDTO.email())
                         .orElseGet(() -> memberRepository.save(Member.newbi(profileDTO.email(), profileDTO.name()))))
-                .map(member -> new SignUpResponse(member.getId(), member.getEmail(), member.getName()))
+                .map(member -> new SignUpResponse(member.getId(), member.getEmail(), member.getName(), getTokenDTO(member.getEmail())))
                 .orElse(null);
     }
 
@@ -49,6 +50,8 @@ public class MemberOAuth2Service {
         // 메타 데이터 작성
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        log.info("{}", client_id);
+        log.info("{}", redirectUri);
         // 요청 Params 작성
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("grant_type", "authorization_code"); // 고정
@@ -103,5 +106,9 @@ public class MemberOAuth2Service {
             log.info(e.getMessage());
             return null;
         }
+    }
+
+    private TokenDTO getTokenDTO(String email) {
+        return new TokenDTO(jwtUtil.createToken(email, true), jwtUtil.createToken(email, false));
     }
 }
