@@ -18,6 +18,8 @@ import sesac.docshelper.domain.member.dto.response.SignUpResponse;
 import sesac.docshelper.domain.member.entity.Member;
 import sesac.docshelper.domain.member.repository.MemberRepository;
 import sesac.docshelper.global.dto.response.ResultResponse;
+import sesac.docshelper.global.exception.ErrorCode;
+import sesac.docshelper.global.exception.GlobalException;
 import sesac.docshelper.global.util.jwt.JwtUtil;
 
 import java.net.URLDecoder;
@@ -64,12 +66,18 @@ public class MemberOAuth2Service {
         // 요청에 대한 Entity 만들기
         HttpEntity<MultiValueMap<String,String>> requestEntity = new HttpEntity<>(params, headers);
         // AccessToken 요청 후 결과값 받기
-        ResponseEntity<String> responseEntity = new RestTemplate().exchange(
-                "https://oauth2.googleapis.com/token",
-                HttpMethod.POST,
-                requestEntity,
-                String.class
-        );
+        ResponseEntity<String> responseEntity;
+        try{
+            responseEntity = new RestTemplate().exchange(
+                    "https://oauth2.googleapis.com/token",
+                    HttpMethod.POST,
+                    requestEntity,
+                    String.class
+            );
+        } catch (Exception e){
+            log.error("google ATK 얻으려다 난 에러: {} -------------------------",e.getMessage());
+            throw new GlobalException(ErrorCode.BAD_REQUEST_TO_GOOGLE);
+        }
         // 받은 직렬화된 JSON 데이터를 역직렬화(객체화) 하기 위해 ObjectMapper를 사용.
         // ObjectMapper의 정책 설정: JSON에는 존재하지만, Java 객체에는 존재하지 않는 속성에 대해 무시하고 역직렬화 진행 (원래는 에러남)
         try{

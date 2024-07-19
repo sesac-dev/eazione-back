@@ -1,9 +1,6 @@
 package sesac.docshelper.domain.member.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,19 +16,19 @@ public class Member {
     long id;
     String email;
     String name;
-
     //추가 정보
-    Long passportId; //여권 id
-    Long identityCardId; //외국인등록증 id
     Long income; //소득
     String housingType; //주거형태
+    // 매핑
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    private IdentityCard identityCard;
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    private Passport passport;
 
     @Builder
-    public Member(String email, String name, long passportId, long identityCardId, long income, String housingType){
+    public Member(String email, String name, long income, String housingType){
         this.email = email;
         this.name  = name;
-        this.passportId = passportId;
-        this.identityCardId = identityCardId;
         this.income =income;
         this.housingType = housingType;
     }
@@ -40,8 +37,6 @@ public class Member {
         return Member.builder()
                 .email(email)
                 .name(name)
-                .passportId(0)
-                .identityCardId(0)
                 .income(0)
                 .housingType(null)
                 .build();

@@ -19,7 +19,7 @@ import java.util.Map;
 @RestController
 @Slf4j
 @RequiredArgsConstructor
-@RequestMapping("/members/")
+@RequestMapping("/members")
 public class MemberOauth2Controller {
     private final MemberOAuth2Service memberOAuth2Service;
 

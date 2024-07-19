@@ -16,4 +16,7 @@ public class IdentityCard {
     String endDateOfStay; //체류기간 만료일
     String address; //체류지
     String reportDate; //신고일
+
+    @OneToOne
+    Member member;
 }

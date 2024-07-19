@@ -45,6 +45,12 @@ dependencies {
     implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
     // ⭐ AWS
     implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+    // ⭐ MapStruct
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+    testAnnotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
+    implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+
 }
 
 tasks.named('test') {
