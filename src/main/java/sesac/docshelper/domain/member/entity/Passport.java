@@ -1,9 +1,6 @@
 package sesac.docshelper.domain.member.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Passport {
@@ -22,4 +19,7 @@ public class Passport {
     String placeOfBirth; //출생지
     String type; //여권종류
     String countryOfIssue; //여권 발급국
+
+    @OneToOne
+    Member member;
 }

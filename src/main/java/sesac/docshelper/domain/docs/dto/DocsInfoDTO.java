@@ -6,7 +6,8 @@ import java.util.List;
 
 public record DocsInfoDTO(
         String title, //서류 제목
-        MultipartFile image, //원본 서류 이미지
-        List<ItemInfoDTO> items //빈칸 정보
+        String image, //원본 서류 이미지
+        List<ItemInfoDTO> items, //내용 있는 칸 좌표
+        List<ItemInfoDTO> emptyItems // 빈칸 좌표
 ) {
 }
