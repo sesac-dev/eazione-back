@@ -20,6 +20,8 @@ import sesac.docshelper.domain.member.repository.MemberRepository;
 import sesac.docshelper.global.dto.response.ResultResponse;
 import sesac.docshelper.global.util.jwt.JwtUtil;
 
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 
@@ -37,7 +39,7 @@ public class MemberOAuth2Service {
     private String client_secret;
 
     public SignUpResponse signUp(String authorization_code, String redirectUri){
-        return Optional.ofNullable(requestATK(authorization_code, redirectUri))
+        return Optional.ofNullable(requestATK(URLDecoder.decode(authorization_code, StandardCharsets.UTF_8), redirectUri))
                 .map(oauthDTO -> findProfile(oauthDTO.access_token()))
                 .map(profileDTO -> memberRepository.findByEmail(profileDTO.email())
                         .orElseGet(() -> memberRepository.save(Member.newbi(profileDTO.email(), profileDTO.name()))))
