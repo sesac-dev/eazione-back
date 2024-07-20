@@ -54,7 +54,7 @@ public class S3MultiPartUploader {
 
         int a = (int) (Math.random() * 100000);
         // (1) File 이름은 유일무이하도록 설정
-        String fileName = "static" + "/" + a + uploadFile.getName();
+        String fileName = "userUpload" + "/" + a + uploadFile.getName();
 
         // (2) S3를 이용해 파일을 올리고 URL을 반환받기
         String uploadImageUrl = putS3(uploadFile, fileName);

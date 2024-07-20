@@ -10,5 +10,6 @@ public record SignUpResponse (
     long id,
     String email,
     String name,
+    boolean isNew,
     TokenDTO tokenDTO
 ) { }
