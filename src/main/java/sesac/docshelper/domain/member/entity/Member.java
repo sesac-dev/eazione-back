@@ -1,5 +1,6 @@
 package sesac.docshelper.domain.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,8 +23,10 @@ public class Member {
     String phoneNumber;
     // 매핑
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    @JsonBackReference
     private IdentityCard identityCard;
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Passport passport;
 
     @Builder

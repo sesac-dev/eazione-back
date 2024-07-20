@@ -1,5 +1,7 @@
 package sesac.docshelper.domain.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,5 +28,6 @@ public class Passport {
     String countryOfIssue; //여권 발급국
 
     @OneToOne
+    @JsonManagedReference
     Member member;
 }
