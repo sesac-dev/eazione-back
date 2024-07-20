@@ -17,7 +17,6 @@ import sesac.docshelper.domain.member.dto.googleOauth.GoogleProfileDTO;
 import sesac.docshelper.domain.member.dto.response.SignUpResponse;
 import sesac.docshelper.domain.member.entity.Member;
 import sesac.docshelper.domain.member.repository.MemberRepository;
-import sesac.docshelper.global.dto.response.ResultResponse;
 import sesac.docshelper.global.exception.ErrorCode;
 import sesac.docshelper.global.exception.GlobalException;
 import sesac.docshelper.global.util.jwt.JwtUtil;
@@ -25,6 +24,7 @@ import sesac.docshelper.global.util.jwt.JwtUtil;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 @Service
@@ -41,11 +41,13 @@ public class MemberOAuth2Service {
     private String client_secret;
 
     public SignUpResponse signUp(String authorization_code, String redirectUri){
+        boolean [] isNew = new boolean[]{false};
         return Optional.ofNullable(requestATK(URLDecoder.decode(authorization_code, StandardCharsets.UTF_8), redirectUri))
                 .map(oauthDTO -> findProfile(oauthDTO.access_token()))
                 .map(profileDTO -> memberRepository.findByEmail(profileDTO.email())
-                        .orElseGet(() -> memberRepository.save(Member.newbi(profileDTO.email(), profileDTO.name()))))
-                .map(member -> new SignUpResponse(member.getId(), member.getEmail(), member.getName(), getTokenDTO(member.getEmail())))
+                        .orElseGet(() -> {   isNew[0] = true;
+                                            return memberRepository.save(Member.newbi(profileDTO.email(), profileDTO.name()));}))
+                .map(member -> new SignUpResponse(member.getId(), member.getEmail(), member.getName(), isNew[0], getTokenDTO(member.getEmail())))
                 .orElse(null);
     }
 

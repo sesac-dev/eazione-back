@@ -17,7 +17,9 @@ public enum ErrorCode {
     CANT_UPLOAD_FILE(HttpStatus.BAD_REQUEST, "해당 파일을 업로드할 수가 없습니다."),
     // docs
     VALID_DOCS_TYPE(HttpStatus.BAD_REQUEST, "올바르지 않은 서류 유형입니다."),
-    BAD_REQUET_TO_DOCS(HttpStatus.BAD_REQUEST, "서류 추가 요청이 잘못되었습니다.")
+    BAD_REQUET_TO_DOCS(HttpStatus.BAD_REQUEST, "서류 추가 요청이 잘못되었습니다."),
+    // Member
+    ERROR_IN_ADDINFO(HttpStatus.BAD_REQUEST, "추가 정보 입력에서 오류가 발생하였습니다.")
     ;
     private final HttpStatus httpStatus;
     private final String message;

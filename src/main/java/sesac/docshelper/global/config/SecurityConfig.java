@@ -16,6 +16,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import sesac.docshelper.global.util.jwt.JwtAuthFilter;
 
+
 import java.util.Arrays;
 
 @Configuration
@@ -25,7 +26,7 @@ public class SecurityConfig {
     // 0)
     private final String [] whiteList = {
       "/health-check", "/swagger-ui.html", "/swagger-ui/**", "/api-docs/**", "/swagger-resources/**",
-            "/webjars/**", "/error", "/members/**"
+            "/webjars/**", "/error", "/members/oauth/google/signup/l", "/members//oauth/google/signup/d"
     };
 
     private final JwtAuthFilter jwtAuthFilter;
