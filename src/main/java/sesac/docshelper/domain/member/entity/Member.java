@@ -19,6 +19,7 @@ public class Member {
     //추가 정보
     Long income; //소득
     String housingType; //주거형태
+    String phoneNumber;
     // 매핑
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
     private IdentityCard identityCard;
@@ -26,11 +27,12 @@ public class Member {
     private Passport passport;
 
     @Builder
-    public Member(String email, String name, long income, String housingType){
+    public Member(String email, String name, long income, String housingType, String phoneNumber){
         this.email = email;
         this.name  = name;
         this.income =income;
         this.housingType = housingType;
+        this.phoneNumber = phoneNumber;
     }
 
     public static Member newbi(String email, String name){
@@ -39,6 +41,7 @@ public class Member {
                 .name(name)
                 .income(0)
                 .housingType(null)
+                .phoneNumber("0")
                 .build();
     }
 }
