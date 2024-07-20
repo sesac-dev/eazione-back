@@ -13,6 +13,10 @@ java {
     }
 }
 
+ext {
+    springCloudVersion = '2023.0.1'
+}
+
 configurations {
     compileOnly {
         extendsFrom annotationProcessor
@@ -21,6 +25,12 @@ configurations {
 
 repositories {
     mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 dependencies {
@@ -50,7 +60,8 @@ dependencies {
     testAnnotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
     implementation("org.mapstruct:mapstruct:1.5.3.Final")
     implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
-
+    // ⭐ feign Client
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 }
 
 tasks.named('test') {
