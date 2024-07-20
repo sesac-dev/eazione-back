@@ -1,5 +1,6 @@
 package sesac.docshelper.domain.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,6 @@ public class IdentityCard {
     String reportDate; //신고일
 
     @OneToOne
+    @JsonManagedReference
     Member member;
 }
