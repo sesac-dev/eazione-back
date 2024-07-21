@@ -26,7 +26,7 @@ public class SecurityConfig {
     // 0)
     private final String [] whiteList = {
       "/health-check", "/swagger-ui.html", "/swagger-ui/**", "/api-docs/**", "/swagger-resources/**",
-            "/webjars/**", "/error", "/members/oauth/google/signup/l", "/members//oauth/google/signup/d"
+            "/webjars/**", "/error", "/members/oauth/google/signup/l", "/members/oauth/google/signup/d"
     };
 
     private final JwtAuthFilter jwtAuthFilter;

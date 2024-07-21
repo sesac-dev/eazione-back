@@ -15,6 +15,7 @@ public enum ErrorCode {
     BAD_REQUEST_TO_GOOGLE(HttpStatus.BAD_REQUEST, "Redirect_type_misMatch"),
     // S3
     CANT_UPLOAD_FILE(HttpStatus.BAD_REQUEST, "해당 파일을 업로드할 수가 없습니다."),
+    EMPTY_DOCS(HttpStatus.BAD_REQUEST, "해당 멤버가 소유한 서류가 없습니다."),
     // docs
     VALID_DOCS_TYPE(HttpStatus.BAD_REQUEST, "올바르지 않은 서류 유형입니다."),
     BAD_REQUET_TO_DOCS(HttpStatus.BAD_REQUEST, "서류 추가 요청이 잘못되었습니다."),

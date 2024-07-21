@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sesac.docshelper.domain.docs.entity.NomalDocs;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,8 +29,11 @@ public class Member {
     @JsonBackReference
     private IdentityCard identityCard;
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonBackReference // 해당 Entity는 Member가 관리하고 있는 Entity이다.
     private Passport passport;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<NomalDocs> nomalDocsList;
 
     @Builder
     public Member(String email, String name, long income, String housingType, String phoneNumber){
