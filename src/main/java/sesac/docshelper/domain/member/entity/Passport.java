@@ -28,6 +28,6 @@ public class Passport {
     String countryOfIssue; //여권 발급국
 
     @OneToOne
-    @JsonManagedReference
+    @JsonManagedReference // 어노테이션이 적힌 Entity가 현재 Entity를 관리하는 Entity이다.
     Member member;
 }
