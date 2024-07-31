@@ -43,4 +43,12 @@ public class DocsController {
     public ResponseEntity<ResultResponse<GetMyDocsListResponse>> getDocsList(@AuthenticationPrincipal UserDetailsImpl userDetails){
         return ResponseEntity.ok(ResultResponse.success(docsService.getMyDocs(userDetails)));
     }
+
+    @Operation(description = "서류 자동번역 & 자동 완성")
+    @PostMapping("/auto/translation/{nation}")
+    public ResponseEntity<ResultResponse<?>> getAutoTranslate(@AuthenticationPrincipal UserDetailsImpl userDetails,
+                                                              @RequestPart(name = "img") MultipartFile img,
+                                                             @PathVariable(name = "nation") String nation){
+        return null;
+    }
 }
