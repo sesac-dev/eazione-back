@@ -24,8 +24,8 @@ public class CoordinateService {
     @Transactional
     public String saveDocumentCoordinate(List<ItemInfoDTO> items, String title, boolean isBlank) {
         try{
-            if(coordinateRepository.existsByDocsType(DocsType.valueOf(title))){
-                coordinateRepository.deleteAllByDocsType(DocsType.valueOf(title));
+            if(coordinateRepository.existsByDocsTypeAndBlank(DocsType.valueOf(title), isBlank)){
+                coordinateRepository.deleteAllByDocsTypeAndBlank(DocsType.valueOf(title),isBlank);
             }
             coordinateRepository.saveAll(items.stream()
                     .map(item -> docsMapper.dtoToCoordinate(item,title,isBlank))

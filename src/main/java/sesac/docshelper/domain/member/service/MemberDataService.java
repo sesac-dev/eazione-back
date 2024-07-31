@@ -41,7 +41,6 @@ public class MemberDataService {
     private final PassPortRepository passPortRepository;
     private final IdentityCardRepository identityCardRepository;
     private final S3MultiPartUploader s3MultiPartUploader;
-    private final MemberMapper memberMapper;
     private final OcrClient ocrClient;
 
     public Member addInfo(UserDetailsImpl userDetails, AddInfoRequest addInfoRequest) {

@@ -17,7 +17,7 @@ public class Coordinate {
     private long id;
     @Enumerated(EnumType.STRING)
     private DocsType docsType;  // 어떤 서류에 대한 좌표인지
-    private boolean isBlank;    // 빈칸 좌표인지 질문의 좌표인지
+    private boolean blank;    // 빈칸 좌표인지 질문의 좌표인지
     // 실제 값
     private String columnName;  // 컬럼명
     private double top;         // 상단 좌표

@@ -30,5 +30,7 @@ public interface DocsMapper {
         }
         coordinate.setCheck("check".equalsIgnoreCase(lastToken));
     }
+
+    ItemInfoDTO entityToDto(Coordinate coordinate);
 }
 

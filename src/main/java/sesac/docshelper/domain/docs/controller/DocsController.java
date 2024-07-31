@@ -16,6 +16,7 @@ import sesac.docshelper.domain.docs.service.DocsService;
 import sesac.docshelper.global.dto.response.ResultResponse;
 import sesac.docshelper.global.util.UserDetailsImpl;
 
+import javax.xml.transform.Result;
 import java.util.List;
 
 @RestController
@@ -46,9 +47,9 @@ public class DocsController {
 
     @Operation(description = "서류 자동번역 & 자동 완성")
     @PostMapping("/auto/translation/{nation}")
-    public ResponseEntity<ResultResponse<?>> getAutoTranslate(@AuthenticationPrincipal UserDetailsImpl userDetails,
+    public ResponseEntity<ResultResponse<String>> getAutoTranslate(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                                               @RequestPart(name = "img") MultipartFile img,
                                                              @PathVariable(name = "nation") String nation){
-        return null;
+        return ResponseEntity.ok(ResultResponse.success(docsService.getAutoTranslate(userDetails,img,nation)));
     }
 }
