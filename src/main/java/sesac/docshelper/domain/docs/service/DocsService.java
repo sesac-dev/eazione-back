@@ -47,4 +47,17 @@ public class DocsService {
                 .orElseThrow(() -> new GlobalException(ErrorCode.EMPTY_DOCS));
         return new GetMyDocsListResponse(urls);
     }
+
+    public String getAutoTranslate(UserDetailsImpl userDetails, MultipartFile file, String nation) {
+        try {
+           // 1. 서류 이미지로 만들기
+           String url = s3MultiPartUploader.upload(file);
+
+           return null;
+        }catch (Exception e) {
+            log.info(e.getMessage());
+            throw new GlobalException(ErrorCode.CANT_UPLOAD_FILE);
+        }
+    }
+
 }

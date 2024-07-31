@@ -53,7 +53,7 @@ oauth2:
 jwt:
   secret: ENC(dTQuX11BrDFtcUjBGutl+Ro3w2aQ8XYINrRlo6EN4Delt0a3CMY+ruOpM2B2pDoUmFvT4JiI8p+5lZFIEOZo97hcYJZVzv9Pm1Tzo/97dKQ+Wrc0fOD+5jKptZ6ClmALG00xBHduspvn+wya+1bV6QvZya/gT+14YHw49+TG1xBXFHAwERjQwl6flHHTpwAN)
   token:
-    access-expiration-time: 43200000 # 12시간
+    access-expiration-time: 259200000 # 12시간
     refresh-expiration-time: 259200000 # 3일
 
 #aws s3 bucket
