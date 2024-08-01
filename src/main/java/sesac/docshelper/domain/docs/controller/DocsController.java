@@ -3,6 +3,7 @@ package sesac.docshelper.domain.docs.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,7 @@ public class DocsController {
     }
 
     @Operation(description = "서류 자동번역 & 자동 완성")
-    @PostMapping("/auto/translation/{nation}")
+    @PostMapping(value = "/auto/translation/{nation}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResultResponse<String>> getAutoTranslate(@AuthenticationPrincipal UserDetailsImpl userDetails,
                                                               @RequestPart(name = "img") MultipartFile img,
                                                              @PathVariable(name = "nation") String nation){
