@@ -2,8 +2,6 @@ package sesac.docshelper.domain.member.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import sesac.docshelper.domain.docs.dto.NaverField;
@@ -58,8 +56,8 @@ public class MemberDataService {
                     member.setCurrentWorkplace(addInfoRequest.currentWorkplace());
                     member.setCurrentWorkplaceRegistrationNumber(addInfoRequest.currentWorkplaceRegistrationNumber());
                     member.setWorkplacePhoneNumber(addInfoRequest.workplacePhoneNumber());
-                    member.setProfile(image);
-                    member.setSign(signature);
+                    member.setProfileImage(image);
+                    member.setSignature(signature);
                     return  member;})
                 .map(memberRepository::save).orElse(null));
         } catch (Exception e){

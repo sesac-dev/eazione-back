@@ -28,9 +28,9 @@ public class Member {
     String currentWorkplaceRegistrationNumber;//현근무처_등록번호
     String workplacePhoneNumber;//현근무처_전화번호
     @Column(length = 2048)
-    String profile;
+    String profileImage;
     @Column(length = 2048)
-    String sign;
+    String signature;
 
     // 매핑
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
