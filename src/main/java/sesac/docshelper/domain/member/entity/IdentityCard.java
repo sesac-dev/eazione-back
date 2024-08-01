@@ -2,7 +2,6 @@ package sesac.docshelper.domain.member.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +16,7 @@ public class IdentityCard {
     long id;
     String foreignNumber; //등록번호
     String name; //이름
-    String county; //국가
+    String country; //국가
     String status;  //체류자격
     String issueDate; //발급일자
     String startDateOfStay; //체류기간 허가일

@@ -23,6 +23,7 @@ public class Passport {
     String dateOfIssue; //발급일
     String expiryOfDate; //만료일
     String issuingAuthority; //발급기관
+    String placeOfBirth; // 출생지
     String type; //여권종류
     String countryOfIssue; //여권 발급국
 

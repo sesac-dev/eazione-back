@@ -62,6 +62,7 @@ dependencies {
     implementation("org.projectlombok:lombok-mapstruct-binding:0.2.0")
     // ⭐ feign Client
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
 }
 
 tasks.named('test') {
