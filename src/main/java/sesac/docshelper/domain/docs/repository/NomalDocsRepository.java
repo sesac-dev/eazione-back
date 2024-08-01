@@ -10,4 +10,5 @@ public interface NomalDocsRepository extends JpaRepository<NomalDocs, Long> {
 
     Optional<NomalDocs> findByMember_Id(long id);
     Optional<List<NomalDocs>> findAllByMember_Id(long id);
+    Integer countAllByMember_Id(long id);
 }
