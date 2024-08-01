@@ -35,6 +35,24 @@ public class S3MultiPartUploader {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+    // 바이트 배열을 파일로 변환하는 메서드
+    private File convertBytesToFile(byte[] bytes, String fileName) throws IOException {
+        File file = new File(System.getProperty("java.io.tmpdir") + "/" + fileName+".jpg");
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(bytes);
+        }
+        return file;
+    }
+
+    public String upload(byte[] bytes) throws IOException {
+        // 바이트 배열을 파일로 변환
+        File file = convertBytesToFile(bytes, "tempUploadFile");
+
+        // 변환된 파일을 기존 업로드 메서드에 전달
+        return upload(file);
+    }
+
+
     // 1. MultipartFile -> File 변환 -> S3 업로드 -> URL 주소 반환
     public String upload(MultipartFile multipartFile) throws IOException {
 

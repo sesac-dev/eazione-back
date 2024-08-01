@@ -1,5 +1,6 @@
 package sesac.docshelper.domain.docs.service.client;
 
+import feign.Response;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,6 @@ import org.springframework.http.ResponseEntity;
 public interface AutoClient {
 
     @PostMapping( value = "/ai/docsfill", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    MultipartFile getCompleteResponse(@RequestPart("file") MultipartFile image, @RequestPart("data") String data);
+    Response getCompleteResponse(@RequestPart("image") MultipartFile image, @RequestPart("data") String data);
 
 }

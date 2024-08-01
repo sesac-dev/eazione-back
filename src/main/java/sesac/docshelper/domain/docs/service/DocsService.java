@@ -1,6 +1,7 @@
 package sesac.docshelper.domain.docs.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import feign.Response;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ import sesac.docshelper.global.exception.GlobalException;
 import sesac.docshelper.global.util.UserDetailsImpl;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -84,8 +86,12 @@ public class DocsService {
            DocsFillRequest docsFillRequest = new DocsFillRequest(memberMapper.memberToDto(userDetails.getMember()),new DocsInfoDTO(title, nation, items, emptyItems));
            logDocsFillRequest(docsFillRequest);
             String jsonData = objectMapper.writeValueAsString(docsFillRequest);
-            MultipartFile completeResponse = autoClient.getCompleteResponse(file, jsonData);
-            return s3MultiPartUploader.upload(completeResponse);
+            Response response = autoClient.getCompleteResponse(file, jsonData);
+            // 응답을 byte[]로 변환
+            InputStream inputStream = response.body().asInputStream();
+            byte[] bytes = inputStream.readAllBytes();
+
+            return s3MultiPartUploader.upload(bytes);
         }catch (Exception e) {
             log.info(e.getMessage());
             throw new GlobalException(ErrorCode.CANT_UPLOAD_FILE);
