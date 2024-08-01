@@ -13,5 +13,5 @@ import sesac.docshelper.domain.docs.dto.DocsFillRequest;
 public interface AutoClient {
 
     @PostMapping( value = "/ai/docsfill", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    MultipartFile getCompleteResponse(@RequestPart MultipartFile image, @RequestPart DocsFillRequest data);
+    MultipartFile getCompleteResponse(@RequestPart MultipartFile image, @RequestPart("data") String data);
 }

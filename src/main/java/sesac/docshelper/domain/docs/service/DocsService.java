@@ -1,5 +1,6 @@
 package sesac.docshelper.domain.docs.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,7 @@ public class DocsService {
     private final CoordinateRepository coordinateRepository;
     private final PassPortRepository passPortRepository;
     private final IdentityCardRepository identityCardRepository;
+    private final ObjectMapper objectMapper;
 
     public StoreNomalDocsResponse storeNomalDocs(MultipartFile file, UserDetailsImpl userDetails) {
         try {
@@ -81,7 +83,8 @@ public class DocsService {
                .toList();
            DocsFillRequest docsFillRequest = new DocsFillRequest(memberMapper.memberToDto(userDetails.getMember()),new DocsInfoDTO(title, nation, items, emptyItems));
            logDocsFillRequest(docsFillRequest);
-            MultipartFile completeResponse = autoClient.getCompleteResponse(file, docsFillRequest);
+            String jsonData = objectMapper.writeValueAsString(docsFillRequest);
+            MultipartFile completeResponse = autoClient.getCompleteResponse(file, jsonData);
             return s3MultiPartUploader.upload(completeResponse);
         }catch (Exception e) {
             log.info(e.getMessage());
