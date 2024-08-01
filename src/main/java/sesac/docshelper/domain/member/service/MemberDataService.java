@@ -12,7 +12,7 @@ import sesac.docshelper.domain.docs.dto.request.NaverOcrRequst;
 import sesac.docshelper.domain.docs.dto.response.NaverOcrResponse;
 import sesac.docshelper.domain.docs.service.client.OcrClient;
 import sesac.docshelper.domain.member.dto.request.AddInfoRequest;
-import sesac.docshelper.domain.member.dto.response.IdCardFrontResponse;
+import sesac.docshelper.domain.member.dto.response.AddInfoResponse;
 import sesac.docshelper.domain.member.entity.IdentityCard;
 import sesac.docshelper.domain.member.entity.Member;
 import sesac.docshelper.domain.member.entity.Passport;
@@ -23,11 +23,9 @@ import sesac.docshelper.domain.member.repository.PassPortRepository;
 import sesac.docshelper.global.exception.ErrorCode;
 import sesac.docshelper.global.exception.GlobalException;
 import sesac.docshelper.global.util.UserDetailsImpl;
-
-import java.awt.*;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -41,16 +39,27 @@ public class MemberDataService {
     private final PassPortRepository passPortRepository;
     private final IdentityCardRepository identityCardRepository;
     private final S3MultiPartUploader s3MultiPartUploader;
+    private final MemberMapper memberMapper;
     private final OcrClient ocrClient;
 
-    public Member addInfo(UserDetailsImpl userDetails, AddInfoRequest addInfoRequest) {
+    public AddInfoResponse addInfo(UserDetailsImpl userDetails, AddInfoRequest addInfoRequest, MultipartFile img, MultipartFile sign) {
         try {
-            return memberRepository.findByEmail(userDetails.getEmail())
-                    .map(member -> {member.setIncome(addInfoRequest.income());
-                        member.setHousingType(addInfoRequest.housingType());
-                        member.setPhoneNumber(addInfoRequest.phoneNumber());
-                        return  member;})
-                    .map(memberRepository::save).orElse(null);
+
+            String image = s3MultiPartUploader.upload(img);
+            String signature = s3MultiPartUploader.upload(sign);
+
+            return memberMapper.memberToAddInfo(memberRepository.findByEmail(userDetails.getEmail())
+                .map(member -> {member.setIncome(addInfoRequest.income());
+                    member.setHousingType(addInfoRequest.housingType());
+                    member.setPhoneNumber(addInfoRequest.phoneNumber());
+                    member.setEmail(addInfoRequest.email());
+                    member.setCurrentWorkplace(addInfoRequest.currentWorkplace());
+                    member.setCurrentWorkplaceRegistrationNumber(addInfoRequest.currentWorkplaceRegistrationNumber());
+                    member.setWorkplacePhoneNumber(addInfoRequest.workplacePhoneNumber());
+                    member.setProfile(image);
+                    member.setSign(signature);
+                    return  member;})
+                .map(memberRepository::save).orElse(null));
         } catch (Exception e){
             log.error(e.getMessage());
             throw new GlobalException(ErrorCode.ERROR_IN_ADDINFO);

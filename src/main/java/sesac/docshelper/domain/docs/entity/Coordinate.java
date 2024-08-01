@@ -27,4 +27,5 @@ public class Coordinate {
     private double height;      // 높이
     @ColumnDefault("false")
     private boolean isCheck;      // check를 위한 공란인가 아닌가
+    private boolean photo;
 }

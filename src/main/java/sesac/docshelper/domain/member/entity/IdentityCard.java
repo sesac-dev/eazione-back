@@ -15,7 +15,7 @@ public class IdentityCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-    String number; //등록번호
+    String foreignNumber; //등록번호
     String name; //이름
     String county; //국가
     String status;  //체류자격
