@@ -67,16 +67,17 @@ public class DocsService {
         try {
            // 1. 서류 이미지로 만들기
            String title = "외국인 통합 신청서";
-           String url = s3MultiPartUploader.upload(file);
+           //String url = s3MultiPartUploader.upload(file);
            List<ItemInfoDTO> items =  coordinateRepository.findAllByDocsTypeAndBlank(DocsType.TEST_DOCS, false).stream()
                .map(docsMapper::entityToDto)
                .toList();
            List<ItemInfoDTO> emptyItems = coordinateRepository.findAllByDocsTypeAndBlank(DocsType.TEST_DOCS, true).stream()
                .map(docsMapper::entityToDto)
                .toList();
-           DocsFillRequest docsFillRequest = new DocsFillRequest(memberMapper.memberToDto(userDetails.getMember()),new DocsInfoDTO(title, url, nation, items, emptyItems));
+           DocsFillRequest docsFillRequest = new DocsFillRequest(memberMapper.memberToDto(userDetails.getMember()),new DocsInfoDTO(title, nation, items, emptyItems));
            logDocsFillRequest(docsFillRequest);
-           return autoClient.getCompleteResponse(docsFillRequest);
+            MultipartFile completeResponse = autoClient.getCompleteResponse(file, docsFillRequest);
+            return s3MultiPartUploader.upload(completeResponse);
         }catch (Exception e) {
             log.info(e.getMessage());
             throw new GlobalException(ErrorCode.CANT_UPLOAD_FILE);
@@ -132,8 +133,8 @@ public class DocsService {
             return;
         }
 
-        log.info("  DocsInfoDTO: title={}, image={}, translate={}",
-            docsInfo.title(), docsInfo.image(), docsInfo.translate());
+        log.info("  DocsInfoDTO: title={}, translate={}",
+            docsInfo.title(), docsInfo.translate());
 
         logItems("Items", docsInfo.items());
         logItems("EmptyItems", docsInfo.emptyItems());
