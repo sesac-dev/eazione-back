@@ -11,6 +11,8 @@ import sesac.docshelper.domain.docs.dto.request.NaverImage;
 import sesac.docshelper.domain.docs.dto.request.NaverOcrRequst;
 import sesac.docshelper.domain.docs.dto.response.NaverOcrResponse;
 import sesac.docshelper.domain.docs.service.client.OcrClient;
+import sesac.docshelper.domain.member.dto.IdentityCardInfoDTO;
+import sesac.docshelper.domain.member.dto.PassportInfoDTO;
 import sesac.docshelper.domain.member.dto.request.AddInfoRequest;
 import sesac.docshelper.domain.member.dto.response.AddInfoResponse;
 import sesac.docshelper.domain.member.entity.IdentityCard;
@@ -124,6 +126,22 @@ public class MemberDataService {
         return idCard;
     }
 
+    public String updateIdcard(UserDetailsImpl userDetails, IdentityCardInfoDTO identityCardInfoDTO){
+        if(memberRepository.findByEmail(userDetails.getEmail()).orElseThrow(() -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND)).getIdentityCard() == null){
+            return "등록된 외국인 등록증이 아직 없습니다.";
+        }
+        try {
+            memberMapper.updateIdCardFromInfoDto(identityCardInfoDTO, memberRepository
+                .findByEmail(userDetails.getEmail()).orElseThrow(() -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND))
+                .getIdentityCard());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new GlobalException(ErrorCode.ERROR_IN_ADDINFO);
+        }
+        return "complete Idcard update";
+    }
+
+
     private Passport addPassPortInfo(List<NaverField> fields, Member member) {
         if (fields == null) {
             log.warn("Fields list is null");
@@ -142,6 +160,22 @@ public class MemberDataService {
         return passport;
     }
 
+    public String updatePassport(UserDetailsImpl userDetails, PassportInfoDTO passportInfoDTO){
+
+        if(memberRepository.findByEmail(userDetails.getEmail()).orElseThrow(() -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND)).getPassport() == null){
+            return "등록된 여권이 아직 없습니다.";
+        }
+
+        try {
+            memberMapper.updatePassportFromInfoDto(passportInfoDTO, memberRepository
+                .findByEmail(userDetails.getEmail()).orElseThrow(() -> new GlobalException(ErrorCode.MEMBER_NOT_FOUND))
+                .getPassport());
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            throw new GlobalException(ErrorCode.ERROR_IN_ADDINFO);
+        }
+        return "complete Passport update";
+    }
 
 
     private <T> T addEntityInfo(List<NaverField> fields, T entity) {
