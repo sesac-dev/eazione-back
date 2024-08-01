@@ -165,6 +165,7 @@ public class MemberDataService {
         Passport passport = passPortRepository.findByMember_Email(member.getEmail()).orElseGet(() -> {
             Passport newPassport = new Passport();
             newPassport.setMember(member);
+            newPassport.setPlaceOfBirth("---");
             return newPassport;
         });
 
@@ -192,7 +193,7 @@ public class MemberDataService {
     }
 
 
-    private <T> T addEntityInfo(List<NaverField> fields, T entity) {
+    private <T> T     addEntityInfo(List<NaverField> fields, T entity) {
 
         fields.forEach(field -> {
             try {
