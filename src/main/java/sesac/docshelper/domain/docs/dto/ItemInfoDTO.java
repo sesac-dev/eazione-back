@@ -6,6 +6,7 @@ public record ItemInfoDTO(
     double left, //죄측 좌표
     double width, //사이즈
     double height,
-    boolean check
+    boolean check,
+    boolean photo
 ){
 }

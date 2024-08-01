@@ -19,6 +19,7 @@ public interface DocsMapper {
     @Mapping(target = "width", source = "item.width")
     @Mapping(target = "height", source = "item.height")
     @Mapping(target = "check", ignore = true) // check 필드를 이후에 설정
+    @Mapping(target = "photo", source = "item.photo")
     Coordinate dtoToCoordinate (ItemInfoDTO item, String title, boolean isBlank);
 
     @AfterMapping

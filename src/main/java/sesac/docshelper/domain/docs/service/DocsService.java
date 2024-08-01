@@ -111,7 +111,7 @@ public class DocsService {
 
     private void logMemberInfo(MemberInfoDTO memberInfo) {
         if (memberInfo == null) {
-            log.info("  MemberInfoDTO is null");
+            log.info("      MemberInfoDTO is null");
             return;
         }
 
@@ -161,8 +161,8 @@ public class DocsService {
 
         log.info("    {}:", label);
         for (ItemInfoDTO item : items) {
-            log.info("      ItemInfoDTO: columnName={}, top={}, left={}, width={}, height={}, check={}",
-                item.columnName(), item.top(), item.left(), item.width(), item.height(), item.check());
+            log.info("      ItemInfoDTO: columnName={}, top={}, left={}, width={}, height={}, check={}, photo={}",
+                item.columnName(), item.top(), item.left(), item.width(), item.height(), item.check(), item.photo());
         }
     }
 }
