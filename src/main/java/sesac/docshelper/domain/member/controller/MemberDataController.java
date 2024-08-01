@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sesac.docshelper.domain.member.dto.IdentityCardInfoDTO;
 import sesac.docshelper.domain.member.dto.PassportInfoDTO;
 import sesac.docshelper.domain.member.dto.request.AddInfoRequest;
 import sesac.docshelper.domain.member.dto.response.AddInfoResponse;
@@ -39,4 +40,23 @@ public class MemberDataController {
             ){
         return ResponseEntity.ok(ResultResponse.success(memberDataService.addOcrInfo(userDetails,img,docsType)));
     }
+
+    @Operation(description = "여권 안 들어온 정보 업데이트, DTO 같음")
+    @PatchMapping("add-ocr/passport")
+    public  ResponseEntity<ResultResponse<String>> addMore(
+        @AuthenticationPrincipal UserDetailsImpl userDetails,
+        @RequestBody  PassportInfoDTO passportInfoDTO
+    ){
+        return  ResponseEntity.ok(ResultResponse.success(memberDataService.updatePassport(userDetails, passportInfoDTO)));
+    }
+
+    @Operation(description = "외국인 등록증 안 들어온 데이터, DTO 같음")
+    @PatchMapping("add-ocr/idCard")
+    public ResponseEntity<ResultResponse<String>> addMore(
+        @AuthenticationPrincipal UserDetailsImpl userDetails,
+        @RequestBody IdentityCardInfoDTO identityCardInfo
+    ){
+        return ResponseEntity.ok(ResultResponse.success(memberDataService.updateIdcard(userDetails, identityCardInfo)));
+    }
+
 }
