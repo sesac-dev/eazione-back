@@ -2,8 +2,8 @@ package sesac.docshelper.domain.member.dto;
 
 public record PassportInfoDTO(
         String passportNumber, //여권번호
-        String sureName, //성
-        String givenNames, //이름
+        String surName, //성
+        String givenName, //이름
         String dateOfBirth,//생일
         String sex, //성별
         String nationality, //국적

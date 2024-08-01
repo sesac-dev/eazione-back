@@ -1,6 +1,5 @@
 package sesac.docshelper.domain.member.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -16,8 +15,8 @@ public class Passport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
     String passportNumber; //여권번호
-    String sureName; //성
-    String givenNames; //이름
+    String surName; //성
+    String givenName; //이름
     String dateOfBirth; //생일
     String sex; //성별
     String nationality; //국적
