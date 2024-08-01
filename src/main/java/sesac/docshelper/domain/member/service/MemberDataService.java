@@ -68,6 +68,23 @@ public class MemberDataService {
         }
     }
 
+    public AddInfoResponse getInfo(UserDetailsImpl userDetails){
+        return  memberMapper.memberToAddInfo(userDetails.getMember());
+    }
+
+    public Object getOcrInfo (UserDetailsImpl userDetails, String docsType){
+        switch (docsType.toLowerCase()){
+            case "passport": {
+                return passPortRepository.findByMember_Email(userDetails.getEmail());
+            }
+            case "idcard": {
+                return identityCardRepository.findByMember_Email(userDetails.getEmail());
+            }
+            default:
+                return "요청하신게 뭐죠..?";
+        }
+    }
+
     public Object addOcrInfo (UserDetailsImpl userDetails, MultipartFile file, String docType) {
         try {
             // S3에 저장
