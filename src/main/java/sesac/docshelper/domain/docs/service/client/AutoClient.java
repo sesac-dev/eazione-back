@@ -14,6 +14,6 @@ import org.springframework.http.ResponseEntity;
 public interface AutoClient {
 
     @PostMapping( value = "/ai/docsfill", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    MultipartFile getCompleteResponse(@RequestPart("file") MultipartFile image, @RequestPart("data") DocsFillRequest data);
+    MultipartFile getCompleteResponse(@RequestPart("file") MultipartFile image, @RequestPart("data") String data);
 
 }
