@@ -9,7 +9,6 @@ import sesac.docshelper.domain.docs.dto.DocsInfoDTO;
 import sesac.docshelper.domain.docs.dto.ItemInfoDTO;
 import sesac.docshelper.domain.docs.dto.response.GetMyDocsListResponse;
 import sesac.docshelper.domain.docs.dto.response.StoreNomalDocsResponse;
-import sesac.docshelper.domain.docs.entity.Coordinate;
 import sesac.docshelper.domain.docs.entity.DocsType;
 import sesac.docshelper.domain.docs.entity.NomalDocs;
 import sesac.docshelper.domain.docs.mapper.DocsMapper;
@@ -103,7 +102,7 @@ public class DocsService {
         }
 
         log.info("  MemberInfoDTO: email={}, name={}, profileImage={}, passportInfo={}, identityCardInfo={}, income={}, housingType={}",
-            memberInfo.email(), memberInfo.name(), memberInfo.profile(),
+            memberInfo.email(), memberInfo.name(), memberInfo.profileImage(),
             memberInfo.passportInfo(), memberInfo.identityCardInfo(), memberInfo.income(), memberInfo.housingType());
     }
 

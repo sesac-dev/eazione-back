@@ -10,8 +10,8 @@ public record MemberInfoDTO(
     String currentWorkplace,
     String currentWorkplaceRegistrationNumber,
     String workplacePhoneNumber,
-    String profile,
-    String sign,
+    String profileImage,
+    String signature,
     IdentityCardInfoDTO identityCardInfo,
     PassportInfoDTO passportInfo
 ) {

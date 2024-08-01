@@ -26,7 +26,7 @@ public class MemberDataController {
 
     @Operation(description = "사용자 추가 정보 입력하기 (연봉, 주거형태, 전화번호 ")
     @PostMapping("/add-info")
-    public ResponseEntity<ResultResponse<AddInfoResponse>> addInfo(@RequestPart(value = "info") AddInfoRequest addInfoRequest, @RequestPart(value = "img") MultipartFile img, @RequestPart(value = "sign") MultipartFile sign ,@AuthenticationPrincipal UserDetailsImpl userDetails){
+    public ResponseEntity<ResultResponse<AddInfoResponse>> addInfo(@RequestPart(value = "info") AddInfoRequest addInfoRequest, @RequestPart(value = "img") MultipartFile img, @RequestPart(value = "signature") MultipartFile sign ,@AuthenticationPrincipal UserDetailsImpl userDetails){
         return ResponseEntity.ok(ResultResponse.success(memberDataService.addInfo(
             userDetails, addInfoRequest, img, sign )));
     }
