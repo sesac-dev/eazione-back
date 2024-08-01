@@ -18,6 +18,10 @@ spring:
         jdbc:
           time_zone: Asia/Seoul
     show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 
 server:
   port: 8080
@@ -74,3 +78,4 @@ cloud:
   naver:
     template-ocr-url: ENC(FTVYlo/LiNoWqajfGj5Nrtl3+6w/YzKzxMMWR/uWp1wUotJq+88KvefUyaF7CbMZOnQUwM8C5Ei1uUFgAjGOVUjcBfVQaKBFgbfhMVY6GPlLcdMI/P/8Ou/JEiUhqu4rNG9XN+9vG9DEworGzemiq40JdnIkrteNTJtPuioGVl/EzMa37AN8XQ==)
     secret: ENC(HDwud1PVTG9WybSFNsyFjy1o7WTIKpYKZMgqHT2IbMDmQqfmvnxcCHx7K97rh6ezRk2VmYTAJMw=)
+

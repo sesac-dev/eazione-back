@@ -59,8 +59,8 @@ public class DocsService {
     public GetMyDocsListResponse getMyDocs(UserDetailsImpl userDetails) {
         List<String> urls = new ArrayList<>();
         nomalDocsRepository.findAllByMember_Id(userDetails.getMember().getId())
-                .map(nomalDocs -> urls.add(nomalDocs.getUrl()))
-                .orElseThrow(() -> new GlobalException(ErrorCode.EMPTY_DOCS));
+                .orElseThrow(() -> new GlobalException(ErrorCode.EMPTY_DOCS))
+            .forEach(nomalDocs -> urls.add(nomalDocs.getUrl()));
         return new GetMyDocsListResponse(urls);
     }
 
