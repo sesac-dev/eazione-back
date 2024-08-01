@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sesac.docshelper.domain.docs.dto.ItemInfoDTO;
 import sesac.docshelper.domain.docs.dto.request.SettingCoordinateRequest;
+import sesac.docshelper.domain.docs.dto.response.DocsCountResponse;
 import sesac.docshelper.domain.docs.dto.response.GetMyDocsListResponse;
 import sesac.docshelper.domain.docs.dto.response.StoreNomalDocsResponse;
 import sesac.docshelper.domain.docs.service.CoordinateService;
@@ -51,5 +52,11 @@ public class DocsController {
                                                               @RequestPart(name = "img") MultipartFile img,
                                                              @PathVariable(name = "nation") String nation){
         return ResponseEntity.ok(ResultResponse.success(docsService.getAutoTranslate(userDetails,img,nation)));
+    }
+
+    @Operation(description = "여권, 외국인 등록증 등록 했는지 boolean + 그냥 문서 저장 몇 개 했는지 보여주기")
+    @GetMapping("/count")
+    public ResponseEntity<ResultResponse<DocsCountResponse>> getCount(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseEntity.ok(ResultResponse.success(docsService.getCount(userDetails)));
     }
 }

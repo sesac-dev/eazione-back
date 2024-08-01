@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import sesac.docshelper.domain.docs.dto.DocsFillRequest;
 import sesac.docshelper.domain.docs.dto.DocsInfoDTO;
 import sesac.docshelper.domain.docs.dto.ItemInfoDTO;
+import sesac.docshelper.domain.docs.dto.response.DocsCountResponse;
 import sesac.docshelper.domain.docs.dto.response.GetMyDocsListResponse;
 import sesac.docshelper.domain.docs.dto.response.StoreNomalDocsResponse;
 import sesac.docshelper.domain.docs.entity.DocsType;
@@ -19,6 +20,8 @@ import sesac.docshelper.domain.member.dto.IdentityCardInfoDTO;
 import sesac.docshelper.domain.member.dto.MemberInfoDTO;
 import sesac.docshelper.domain.member.dto.PassportInfoDTO;
 import sesac.docshelper.domain.member.mapper.MemberMapper;
+import sesac.docshelper.domain.member.repository.IdentityCardRepository;
+import sesac.docshelper.domain.member.repository.PassPortRepository;
 import sesac.docshelper.domain.member.service.S3MultiPartUploader;
 import sesac.docshelper.global.exception.ErrorCode;
 import sesac.docshelper.global.exception.GlobalException;
@@ -40,6 +43,8 @@ public class DocsService {
     private final DocsMapper docsMapper;
     private final NomalDocsRepository nomalDocsRepository;
     private final CoordinateRepository coordinateRepository;
+    private final PassPortRepository passPortRepository;
+    private final IdentityCardRepository identityCardRepository;
 
     public StoreNomalDocsResponse storeNomalDocs(MultipartFile file, UserDetailsImpl userDetails) {
         try {
@@ -82,6 +87,14 @@ public class DocsService {
             log.info(e.getMessage());
             throw new GlobalException(ErrorCode.CANT_UPLOAD_FILE);
         }
+    }
+
+    public DocsCountResponse getCount(UserDetailsImpl userDetails){
+        return new DocsCountResponse(
+            passPortRepository.existsByMember_Id(userDetails.getMember().getId()),
+            identityCardRepository.existsByMember_Id(userDetails.getMember().getId()),
+            nomalDocsRepository.countAllByMember_Id(userDetails.getMember().getId())
+        );
     }
 
 
@@ -152,6 +165,4 @@ public class DocsService {
                 item.columnName(), item.top(), item.left(), item.width(), item.height(), item.check());
         }
     }
-
-
 }
