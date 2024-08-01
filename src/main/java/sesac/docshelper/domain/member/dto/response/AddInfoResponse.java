@@ -1,6 +1,6 @@
-package sesac.docshelper.domain.member.dto;
+package sesac.docshelper.domain.member.dto.response;
 
-public record MemberInfoDTO(
+public record AddInfoResponse (
     long id,
     String email,
     String name,
@@ -11,8 +11,5 @@ public record MemberInfoDTO(
     String currentWorkplaceRegistrationNumber,
     String workplacePhoneNumber,
     String profile,
-    String sign,
-    IdentityCardInfoDTO identityCardInfo,
-    PassportInfoDTO passportInfo
-) {
-}
+    String sign
+) {}

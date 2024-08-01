@@ -103,7 +103,7 @@ public class DocsService {
         }
 
         log.info("  MemberInfoDTO: email={}, name={}, profileImage={}, passportInfo={}, identityCardInfo={}, income={}, housingType={}",
-            memberInfo.email(), memberInfo.name(), memberInfo.profileImage(),
+            memberInfo.email(), memberInfo.name(), memberInfo.profile(),
             memberInfo.passportInfo(), memberInfo.identityCardInfo(), memberInfo.income(), memberInfo.housingType());
     }
 
@@ -119,7 +119,7 @@ public class DocsService {
 
     private void logIdentityCardInfo(IdentityCardInfoDTO identityCardInfo) {
         if (identityCardInfo == null) {
-            log.info("    IdentityCardInfoDTO is null");
+            log.info("IdentityCardInfoDTO is null");
             return;
         }
 

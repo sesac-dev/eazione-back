@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sesac.docshelper.domain.member.dto.PassportInfoDTO;
 import sesac.docshelper.domain.member.dto.request.AddInfoRequest;
+import sesac.docshelper.domain.member.dto.response.AddInfoResponse;
 import sesac.docshelper.domain.member.dto.response.IdCardBackResponse;
 import sesac.docshelper.domain.member.dto.response.IdCardFrontResponse;
 import sesac.docshelper.domain.member.entity.Member;
@@ -24,8 +25,9 @@ public class MemberDataController {
 
     @Operation(description = "사용자 추가 정보 입력하기 (연봉, 주거형태, 전화번호 ")
     @PostMapping("/add-info")
-    public ResponseEntity<ResultResponse<Member>> addInfo(@RequestBody AddInfoRequest addInfoRequest, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return ResponseEntity.ok(ResultResponse.success(memberDataService.addInfo(userDetails, addInfoRequest)));
+    public ResponseEntity<ResultResponse<AddInfoResponse>> addInfo(@RequestPart(value = "info") AddInfoRequest addInfoRequest, @RequestPart(value = "img") MultipartFile img, @RequestPart(value = "sign") MultipartFile sign ,@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseEntity.ok(ResultResponse.success(memberDataService.addInfo(
+            userDetails, addInfoRequest, img, sign )));
     }
 
     @Operation(description = "외국인 등록증 여권 읽기, 여권이면 passport, 외국인 등록증 앞: foreginerfront, 뒤: foreginerback")

@@ -23,7 +23,15 @@ public class Member {
     //추가 정보
     Long income; //소득
     String housingType; //주거형태
-    String phoneNumber;
+    String phoneNumber; //전화번호
+    String currentWorkplace; //현근무처
+    String currentWorkplaceRegistrationNumber;//현근무처_등록번호
+    String workplacePhoneNumber;//현근무처_전화번호
+    @Column(length = 2048)
+    String profile;
+    @Column(length = 2048)
+    String sign;
+
     // 매핑
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
     @JsonBackReference
