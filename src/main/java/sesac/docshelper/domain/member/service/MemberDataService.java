@@ -52,7 +52,6 @@ public class MemberDataService {
                 .map(member -> {member.setIncome(addInfoRequest.income());
                     member.setHousingType(addInfoRequest.housingType());
                     member.setPhoneNumber(addInfoRequest.phoneNumber());
-                    member.setEmail(addInfoRequest.email());
                     member.setCurrentWorkplace(addInfoRequest.currentWorkplace());
                     member.setCurrentWorkplaceRegistrationNumber(addInfoRequest.currentWorkplaceRegistrationNumber());
                     member.setWorkplacePhoneNumber(addInfoRequest.workplacePhoneNumber());
